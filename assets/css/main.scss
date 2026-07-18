@@ -1,0 +1,22 @@
+---
+# Main SCSS entry — imports partials and injects theme variables from _config.yml
+---
+
+@charset "utf-8";
+
+// Inject theme variables as CSS custom properties (overridable, used as fallback in partials)
+:root {
+  --color-primary: {{ site.color_scheme.primary }};
+  --color-accent: {{ site.color_scheme.accent }};
+  --color-background: {{ site.color_scheme.background }};
+  --color-text: {{ site.color_scheme.text }};
+  --font-heading: {{ site.font_heading | default: "Georgia, serif" }};
+  --font-body: {{ site.font_body | default: "system-ui, sans-serif" }};
+}
+
+@import "variables";
+@import "breakpoints";
+@import "base";
+@import "layout";
+@import "recipe";
+@import "print";

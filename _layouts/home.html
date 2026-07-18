@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">{{ site.title }}</h1>
+    <p class="hero__lead">{{ site.description }}</p>
+  </div>
+</section>
+
+<section class="container home">
+  {% if site.features.search %}
+    {% include search-bar.html %}
+  {% endif %}
+
+  <nav class="filter-bar" aria-label="Filter recipes by category">
+    <button class="filter-bar__chip is-active" data-filter="all" type="button">All</button>
+    {% assign cats = site.recipes | map: "categories" | flatten | uniq | sort %}
+    {% for cat in cats %}
+      {% assign label = site.category_labels[cat] | default: cat %}
+      <button class="filter-bar__chip" data-filter="{{ cat | slugify }}" type="button">{{ label }}</button>
+    {% endfor %}
+  </nav>
+
+  <div class="recipe-grid" id="recipe-grid">
+    {% assign recipes = site.recipes | sort: 'date' | reverse %}
+    {% for recipe in recipes %}
+      {% include recipe-card.html recipe=recipe %}
+    {% endfor %}
+  </div>
+
+  <p class="recipe-grid__empty" id="recipe-empty" hidden>No recipes match your filters.</p>
+</section>

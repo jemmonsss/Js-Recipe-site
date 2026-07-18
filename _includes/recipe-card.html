@@ -1,0 +1,27 @@
+<article class="recipe-card" data-categories="{{ recipe.categories | join: ' ' | slugify }}" data-title="{{ recipe.title | downcase }}" data-ingredients="{{ recipe.ingredients | join: ' ' | downcase }}" data-tags="{{ recipe.tags | join: ' ' | downcase }}">
+  <a class="recipe-card__link" href="{{ recipe.url | relative_url }}">
+    <div class="recipe-card__media">
+      {% if recipe.image %}
+        <img class="recipe-card__img" src="{{ recipe.image | relative_url }}" alt="{{ recipe.title }}" loading="lazy">
+      {% else %}
+        <div class="recipe-card__img recipe-card__img--placeholder" aria-hidden="true"></div>
+      {% endif %}
+      {% if site.features.favorites %}
+        <button class="fav-btn fav-btn--card" data-recipe="{{ recipe.path | slugify }}" aria-label="Toggle favorite" type="button">&#9825;</button>
+      {% endif %}
+    </div>
+    <div class="recipe-card__body">
+      <h2 class="recipe-card__title">{{ recipe.title }}</h2>
+      <ul class="badges badges--sm" aria-label="Categories">
+        {% for cat in recipe.categories limit: 3 %}
+          {% assign label = site.category_labels[cat] | default: cat %}
+          <li class="badge">{{ label }}</li>
+        {% endfor %}
+      </ul>
+      <p class="recipe-card__time">
+        {% if recipe.prep_time %}<span>Prep {{ recipe.prep_time }}m</span>{% endif %}
+        {% if recipe.cook_time %}<span>Cook {{ recipe.cook_time }}m</span>{% endif %}
+      </p>
+    </div>
+  </a>
+</article>

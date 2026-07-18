@@ -1,0 +1,76 @@
+# Site metadata (used for SEO)
+title: My Recipe Site
+description: A collection of favorite recipes — simple, delicious, and easy to make.
+author: Your Name
+lang: en
+url: "https://yourusername.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Collections
+collections:
+  recipes:
+    output: true
+    permalink: /recipes/:slug/
+
+# Theme colors (CSS variables — injected into :root)
+color_scheme:
+  primary: "#2c3e50"
+  accent: "#e74c3c"
+  background: "#ffffff"
+  text: "#333333"
+
+# Fonts
+font_heading: "Georgia, 'Times New Roman', serif"
+font_body: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+
+# Layout
+container_max_width: 1200px
+recipes_per_page: 12
+show_featured: true
+show_difficulty: true
+
+# Feature toggles
+features:
+  search: true
+  favorites: true
+  servings_calculator: true
+  print_button: true
+
+# Categories — display name mapping
+category_labels:
+  Pasta: "Pasta"
+  Italian: "Italian"
+  Dinner: "Dinner"
+  Breakfast: "Breakfast"
+  Dessert: "Dessert"
+  Vegetarian: "Vegetarian"
+  Soup: "Soup"
+  Baking: "Baking"
+  Quick: "Quick & Easy"
+  Salad: "Salad"
+
+# SEO defaults
+seo:
+  image: /assets/img/default-og-image.jpg
+  twitter_card: "summary_large_image"
+
+# Feed
+feed:
+  path: feed.xml
+
+# Exclude from sitemap / search
+exclude_from_search: false

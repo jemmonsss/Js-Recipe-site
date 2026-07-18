@@ -1,0 +1,86 @@
+---
+layout: default
+---
+<article class="recipe container" itemscope itemtype="https://schema.org/Recipe">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <span aria-hidden="true">/</span>
+    <span itemprop="name">{{ page.title }}</span>
+  </nav>
+
+  <header class="recipe__header">
+    <h1 class="recipe__title" itemprop="name">{{ page.title }}</h1>
+    {% if page.description %}<p class="recipe__description" itemprop="description">{{ page.description }}</p>{% endif %}
+
+    <ul class="badges" aria-label="Categories">
+      {% for cat in page.categories %}
+        {% assign label = site.category_labels[cat] | default: cat %}
+        <li class="badge">{{ label }}</li>
+      {% endfor %}
+    </ul>
+
+    <dl class="recipe__meta">
+      {% if page.prep_time %}<div><dt>Prep</dt><dd><time datetime="PT{{ page.prep_time }}M">{{ page.prep_time }} min</time></dd></div>{% endif %}
+      {% if page.cook_time %}<div><dt>Cook</dt><dd><time datetime="PT{{ page.cook_time }}M">{{ page.cook_time }} min</time></dd></div>{% endif %}
+      {% assign total = page.prep_time | plus: page.cook_time %}
+      <div><dt>Total</dt><dd><time datetime="PT{{ total }}M">{{ total }} min</time></dd></div>
+      {% if page.difficulty and site.show_difficulty %}<div><dt>Difficulty</dt><dd>{{ page.difficulty }}</dd></div>{% endif %}
+      {% if page.author %}<div><dt>Author</dt><dd><address>{{ page.author }}</address></dd></div>{% endif %}
+    </dl>
+
+    <div class="recipe__actions">
+      {% if site.features.servings_calculator %}
+      <div class="servings" aria-label="Adjust servings">
+        <button class="servings__btn" id="servings-minus" aria-label="Decrease servings" type="button">&minus;</button>
+        <span class="servings__count">Servings: <output id="servings-value">{{ page.servings | default: 4 }}</output></span>
+        <button class="servings__btn" id="servings-plus" aria-label="Increase servings" type="button">&plus;</button>
+      </div>
+      {% endif %}
+      {% if site.features.favorites %}
+        <button class="fav-btn" data-recipe="{{ page.path | slugify }}" aria-label="Add to favorites" type="button">&#9825;<span class="fav-btn__label">Save</span></button>
+      {% endif %}
+      {% if site.features.print_button %}
+        <button class="print-btn" id="print-btn" aria-label="Print recipe" type="button">&#9113; Print</button>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.image %}
+  <figure class="recipe__figure">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" loading="lazy" itemprop="image">
+  </figure>
+  {% endif %}
+
+  <div class="recipe__body">
+    {% if page.ingredients %}
+    <section class="recipe__ingredients" aria-labelledby="ing-heading">
+      <h2 id="ing-heading">Ingredients</h2>
+      <ul class="ingredient-list" data-default-servings="{{ page.servings | default: 4 }}">
+        {% for ing in page.ingredients %}
+          <li class="ingredient" data-qty="{{ ing }}">{{ ing }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if page.steps %}
+    <section class="recipe__steps" aria-labelledby="steps-heading">
+      <h2 id="steps-heading">Instructions</h2>
+      <ol class="step-list">
+        {% for step in page.steps %}
+          <li class="step" itemprop="recipeInstructions">{{ step }}</li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+
+    <section class="recipe__notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">Notes</h2>
+      <div class="recipe__notes-body">
+        {{ content }}
+      </div>
+    </section>
+  </div>
+
+  {% include json-ld.html %}
+</article>

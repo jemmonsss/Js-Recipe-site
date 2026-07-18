@@ -1,0 +1,36 @@
+@media print {
+  .site-header,
+  .site-footer,
+  .search-bar,
+  .filter-bar,
+  .fav-btn,
+  .print-btn,
+  .servings,
+  .skip-link,
+  .recipe__figure {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+
+  .recipe__body {
+    display: block;
+  }
+
+  .recipe__ingredients {
+    position: static;
+  }
+
+  a { color: #000; text-decoration: none; }
+
+  .recipe-card {
+    box-shadow: none;
+    border: none;
+  }
+
+  @page { margin: 1.5cm; }
+}
