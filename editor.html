@@ -1,0 +1,101 @@
+---
+layout: default
+title: Recipe Editor
+permalink: /editor.html
+---
+<section class="container editor">
+  <header class="editor__head">
+    <div>
+      <h1>Recipe Editor</h1>
+      <p class="editor__sub">Fill in the form, preview live, then download the <code>.md</code> file and drop it into <code>_recipes/</code> on GitHub.</p>
+    </div>
+    <div class="editor__head-actions">
+      <button class="btn btn--ghost" id="editor-reset" type="button">Reset</button>
+      <button class="btn btn--primary" id="editor-download" type="button">Download .md</button>
+      <button class="btn btn--ghost" id="editor-copy" type="button">Copy</button>
+    </div>
+  </header>
+
+  <div class="editor__templates">
+    <label for="template-select">Start from a template:</label>
+    <select id="template-select">
+      <option value="">— Blank —</option>
+      <option value="pasta">Pasta (Italian)</option>
+      <option value="breakfast">Breakfast</option>
+      <option value="dessert">Dessert / Baking</option>
+      <option value="soup">Soup</option>
+      <option value="salad">Salad</option>
+    </select>
+  </div>
+
+  <div class="editor__grid">
+    <form class="editor__form" id="recipe-form" autocomplete="off">
+      <fieldset>
+        <legend>Basics</legend>
+        <label>Title<input type="text" name="title" id="f-title" placeholder="Spaghetti Carbonara"></label>
+        <label>Description<textarea name="description" id="f-description" rows="2" placeholder="A short, tasty description"></textarea></label>
+        <div class="field-row">
+          <label>Categories<small>comma separated</small><input type="text" name="categories" id="f-categories" placeholder="Pasta, Italian, Dinner"></label>
+          <label>Tags<small>comma separated</small><input type="text" name="tags" id="f-tags" placeholder="quick, bacon"></label>
+        </div>
+        <div class="field-row field-row--4">
+          <label>Prep time (min)<input type="number" name="prep_time" id="f-prep" min="0" value="10"></label>
+          <label>Cook time (min)<input type="number" name="cook_time" id="f-cook" min="0" value="20"></label>
+          <label>Servings<input type="number" name="servings" id="f-servings" min="1" value="4"></label>
+          <label>Difficulty
+            <select name="difficulty" id="f-difficulty">
+              <option>Easy</option><option>Medium</option><option>Hard</option>
+            </select>
+          </label>
+        </div>
+        <div class="field-row">
+          <label>Author<input type="text" name="author" id="f-author" placeholder="Your Name"></label>
+          <label>Date<input type="date" name="date" id="f-date"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Image</legend>
+        <label>Image path
+          <small>Use a file from <code>assets/img/</code> or type any path</small>
+          <input type="text" name="image" id="f-image" placeholder="/assets/img/my-recipe.jpg" list="img-list">
+          <datalist id="img-list"></datalist>
+        </label>
+        <p class="editor__hint" id="img-hint">Tip: add your image to <code>assets/img/</code> in the repo, then reference it here. A live preview shows below.</p>
+        <div class="editor__img-preview" id="img-preview" hidden>
+          <img id="img-preview-img" alt="Recipe preview">
+          <button class="editor__img-clear" id="img-clear" type="button" aria-label="Clear image">Remove</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ingredients</legend>
+        <p class="editor__hint">One ingredient per line. You can include quantities, e.g. <code>400g spaghetti</code>.</p>
+        <textarea name="ingredients" id="f-ingredients" rows="8" placeholder="400g spaghetti&#10;200g pancetta&#10;4 eggs"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Steps</legend>
+        <p class="editor__hint">One step per line.</p>
+        <textarea name="steps" id="f-steps" rows="8" placeholder="Boil the pasta&#10;Fry the pancetta"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Notes (optional)</legend>
+        <textarea name="notes" id="f-notes" rows="3" placeholder="Extra tips shown at the bottom of the page"></textarea>
+      </fieldset>
+    </form>
+
+    <aside class="editor__preview-wrap">
+      <div class="editor__preview-head">
+        <span>Live Preview</span>
+        <span class="editor__filename" id="filename-label">_recipes/untitled.md</span>
+      </div>
+      <pre class="editor__preview" id="markdown-preview"></pre>
+    </aside>
+  </div>
+
+  <p class="editor__status" id="editor-status" role="status" aria-live="polite"></p>
+</section>
+
+<script src="{{ '/assets/js/editor.js' | relative_url }}" defer></script>
