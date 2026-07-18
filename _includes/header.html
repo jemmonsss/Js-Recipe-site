@@ -1,10 +1,16 @@
 <header class="site-header" role="banner">
   <div class="container site-header__inner">
-    <a class="site-header__brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <a class="site-header__brand" href="{{ '/' | relative_url }}">
+      <span class="site-header__mark" aria-hidden="true">🍳</span>
+      {{ site.title }}
+    </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="{{ '/' | relative_url }}">Recipes</a>
       {% if site.features.favorites %}<a href="{{ '/favorites.html' | relative_url }}">Favorites</a>{% endif %}
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="true">
+        <span class="theme-toggle__icon" aria-hidden="true"></span>
+      </button>
     </nav>
   </div>
 </header>

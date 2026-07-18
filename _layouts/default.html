@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'en' }}">
+<html lang="{{ site.lang | default: 'en' }}" class="theme-{{ site.color_mode | default: 'dark' }}" data-theme="{{ site.color_mode | default: 'dark' }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="{{ site.color_scheme.primary }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
     {% seo %}
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var mode = saved || "{{ site.color_mode | default: 'dark' }}";
+          document.documentElement.setAttribute("data-theme", mode);
+          document.documentElement.className = "theme-" + mode;
+        } catch (e) {}
+      })();
+    </script>
     {% include head.html %}
   </head>
   <body class="viewport-unknown">

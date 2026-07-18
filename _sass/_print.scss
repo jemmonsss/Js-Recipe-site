@@ -1,4 +1,11 @@
 @media print {
+  :root {
+    --color-bg: #fff;
+    --color-surface: #fff;
+    --color-text: #000;
+    --color-border: rgba(0, 0, 0, 0.15);
+  }
+
   .site-header,
   .site-footer,
   .search-bar,
@@ -7,30 +14,20 @@
   .print-btn,
   .servings,
   .skip-link,
-  .recipe__figure {
+  .recipe__figure,
+  .theme-toggle {
     display: none !important;
   }
 
-  body {
-    font-size: 12pt;
+  html, body {
+    background: #fff !important;
     color: #000;
-    background: #fff;
   }
 
-  .recipe__body {
-    display: block;
-  }
-
-  .recipe__ingredients {
-    position: static;
-  }
-
+  .recipe__body { display: block; }
+  .recipe__ingredients { position: static; border: none; padding: 0; }
   a { color: #000; text-decoration: none; }
-
-  .recipe-card {
-    box-shadow: none;
-    border: none;
-  }
+  .recipe-card { box-shadow: none; border: none; }
 
   @page { margin: 1.5cm; }
 }

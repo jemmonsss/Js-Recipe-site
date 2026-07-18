@@ -1,17 +1,43 @@
 ---
-# Main SCSS entry — imports partials and injects theme variables from _config.yml
+# Main SCSS entry — injects theme variables, then imports partials
 ---
 
 @charset "utf-8";
 
-// Inject theme variables as CSS custom properties (overridable, used as fallback in partials)
 :root {
   --color-primary: {{ site.color_scheme.primary }};
   --color-accent: {{ site.color_scheme.accent }};
-  --color-background: {{ site.color_scheme.background }};
+  --color-bg: {{ site.color_scheme.background }};
+  --color-surface: {{ site.color_scheme.surface }};
   --color-text: {{ site.color_scheme.text }};
-  --font-heading: {{ site.font_heading | default: "Georgia, serif" }};
-  --font-body: {{ site.font_body | default: "system-ui, sans-serif" }};
+  --font-heading: {{ site.font_heading }};
+  --font-body: {{ site.font_body }};
+
+  --color-bg-rgb: 15, 17, 23;
+  --color-surface-rgb: 23, 26, 35;
+  --color-text-rgb: 232, 234, 240;
+  --color-primary-rgb: 124, 92, 255;
+  --color-accent-rgb: 255, 122, 89;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-muted: rgba(232, 234, 240, 0.62);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
+  --gradient: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+}
+
+[data-theme="light"] {
+  --color-bg: #f7f8fb;
+  --color-surface: #ffffff;
+  --color-text: #1c2030;
+  --color-bg-rgb: 247, 248, 251;
+  --color-surface-rgb: 255, 255, 255;
+  --color-text-rgb: 28, 32, 48;
+  --color-primary-rgb: 124, 92, 255;
+  --color-accent-rgb: 255, 90, 60;
+  --color-border: rgba(20, 24, 40, 0.10);
+  --color-muted: rgba(28, 32, 48, 0.62);
+  --shadow: 0 10px 30px rgba(20, 24, 40, 0.10);
+  --shadow-sm: 0 4px 14px rgba(20, 24, 40, 0.08);
 }
 
 @import "variables";
